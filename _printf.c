@@ -43,12 +43,47 @@ int aux_s(va_list args)
  * Return: 1 porque solo immprime un caracter %
  */
 
-int aux_por(va_list args)
+int aux_por(void)
 {
 	char por = '%';
 
 	write(1, &por, 1);
 	return (1);
+}
+
+/**
+ *
+ *
+ *
+ */
+
+int aux_id(va_list args)
+{
+	long num = va_arg(args, int);
+	int count = 0, i, i2;
+	char tmp[128];
+
+	if (num == 0)
+		return(write(1, "0", 1));
+	if (num < 0)
+	{
+		write(1, "-", 1);
+		num = -num;
+		count++;
+	}
+	for (i = 0; num > 0;)
+	{
+		tmp[i] = (num % 10) + '0';
+		num = num / 10;
+		i++;
+	}
+	for (i2 = i; tmp[i2] >= 0; i2--)
+	{
+		write(1, &tmp[i2], 1);
+		count++;
+	}
+	return (count);
+
 }
 
 /**
@@ -79,7 +114,12 @@ int _printf(const char *format, ...)
 		}
 		else if (format[i] == '%' && format[i + 1] == '%')
 		{
-			count += aux_por(args);
+			count += aux_por();
+			i++;
+		}
+		else if ((format[i] == '%' && format[i + 1] == 'i') || (format[i] == '%' && format[i + 1] == 'd'))
+		{
+			count += aux_id(args);
 			i++;
 		}
 		else
