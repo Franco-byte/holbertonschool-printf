@@ -29,6 +29,9 @@ int aux_s(va_list args)
 	char *s = va_arg(args, char*);
 	int count = 0, i;
 
+	if (s == NULL)
+		return (write(1, "(null)", 6));
+
 	for (i = 0; s[i] != '\0'; i++)
 	{
 		write(1, &s[i], 1);
