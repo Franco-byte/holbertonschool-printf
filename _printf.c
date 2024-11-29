@@ -98,8 +98,8 @@ int aux_id(va_list args)
 
 int _printf(const char *format, ...)
 {
-	va_list args;
 	int i, count = 0;
+	va_list args;
 
 	va_start(args, format);
 	for (i = 0; format[i] != '\0'; i++)
@@ -119,6 +119,8 @@ int _printf(const char *format, ...)
 			count += aux_por();
 			i++;
 		}
+		else if (format[i] == '%' && format[i + 1] == '\0')
+			return (-1);
 		else if (format[i] == '%' && format[i + 1] == 'i')
 		{
 			count += aux_id(args);
@@ -131,8 +133,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			write(1, &format[i], 1);
-			count++;
+			count += write(1, &format[i], 1);
 		}
 	}
 	va_end(args);
