@@ -1,4 +1,5 @@
 #include "main.h"
+#include "stdio.h"
 
 /**
  * aux_c - Funcion que ejecuta el controlador %c
@@ -38,7 +39,6 @@ int aux_s(va_list args)
 
 /**
  * aux_por - Funcion que ejecuta el controlador %
- * @args: Utiliza la lista args
  *
  * Return: 1 porque solo immprime un caracter %
  */
@@ -52,9 +52,10 @@ int aux_por(void)
 }
 
 /**
+ * aux_id - Funcion que ejecuta el controlador i y d
+ * @args: Lista argas
  *
- *
- *
+ * Return: Count que es la cantidad de caracteres del numero
  */
 
 int aux_id(va_list args)
@@ -64,7 +65,7 @@ int aux_id(va_list args)
 	char tmp[128];
 
 	if (num == 0)
-		return(write(1, "0", 1));
+		return (write(1, "0", 1));
 	if (num < 0)
 	{
 		write(1, "-", 1);
@@ -77,7 +78,7 @@ int aux_id(va_list args)
 		num = num / 10;
 		i++;
 	}
-	for (i2 = i; tmp[i2] >= 0; i2--)
+	for (i2 = i - 1; i2 >= 0; i2--)
 	{
 		write(1, &tmp[i2], 1);
 		count++;
@@ -99,7 +100,6 @@ int _printf(const char *format, ...)
 	int i, count = 0;
 
 	va_start(args, format);
-
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%' && format[i + 1] == 'c')
@@ -117,7 +117,12 @@ int _printf(const char *format, ...)
 			count += aux_por();
 			i++;
 		}
-		else if ((format[i] == '%' && format[i + 1] == 'i') || (format[i] == '%' && format[i + 1] == 'd'))
+		else if (format[i] == '%' && format[i + 1] == 'i')
+		{
+			count += aux_id(args);
+			i++;
+		}
+		else if (format[i] == '%' && format[i + 1] == 'd')
 		{
 			count += aux_id(args);
 			i++;
@@ -128,7 +133,6 @@ int _printf(const char *format, ...)
 			count++;
 		}
 	}
-
 	va_end(args);
 	return (count);
 }
