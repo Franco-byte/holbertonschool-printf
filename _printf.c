@@ -50,8 +50,7 @@ int aux_por(void)
 {
 	char por = '%';
 
-	write(1, &por, 1);
-	return (1);
+	return (write(1, &por, 1));
 }
 
 /**
