@@ -67,3 +67,19 @@ Our implementation supports the following specifiers:
 ---
 
 ## **Test Cases**
+```c
+#include "main.h"
+#include <stdio.h>
+
+int main(void)
+{
+    _printf("Character: %c\n", 'A');
+    _printf("String: %s\n", "Hello world");
+    _printf("Positive number: %d\n", 123);
+    _printf("Negative number: %d\n", -456);
+    _printf("Percentage: %%\n");
+    _printf("Null string: %s\n", NULL);
+    _printf("Text without specifiers.\n");
+
+    return (0);
+}
