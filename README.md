@@ -97,3 +97,8 @@ Percentage: %
 Null string: (null)
 Text without specifiers.
 ````
+
+---
+
+## **Author**
+Franco Reyes
