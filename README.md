@@ -83,3 +83,17 @@ int main(void)
 
     return (0);
 }
+  ````
+
+---
+
+## **Expected Output**
+```c
+Character: A
+String: Hello world
+Positive number: 123
+Negative number: -456
+Percentage: %
+Null string: (null)
+Text without specifiers.
+````
