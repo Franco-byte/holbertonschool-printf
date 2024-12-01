@@ -69,7 +69,6 @@ Our implementation supports the following specifiers:
 ## **Test Cases**
 ```c
 #include "main.h"
-#include <stdio.h>
 
 int main(void)
 {
